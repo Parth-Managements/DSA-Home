@@ -67,7 +67,7 @@ void infixToPostfix(string s) {
 }
 
 int main() {
-  string exp = "(p+q)*(m-n)";
+  string exp = "a+b*(c^d-e)^(f+g*h)-i";
   cout << "Infix expression: " << exp << endl;
   infixToPostfix(exp);
   return 0;
