@@ -1,5 +1,7 @@
-#include <bits/stdc++.h>
-
+#include<iostream>
+#include<stack>
+#include<algorithm>
+#include<math.h>
 using namespace std;
 
 bool isOperator(char c) {
@@ -107,7 +109,7 @@ string infixToPrefix(string infix) {
 }
 
 int main() {
-  string s = ("(P+Q)+R/S/T");
+  string s = ("(p+q)*(m-n)");
   cout << "Infix expression: " << s << endl;
   cout << "Prefix Expression: " << infixToPrefix(s) << endl;
   return 0;

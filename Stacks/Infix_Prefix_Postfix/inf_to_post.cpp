@@ -1,5 +1,7 @@
-#include<bits/stdc++.h>
-
+#include<iostream>
+#include<stack>
+#include<algorithm>
+#include<math.h>
 using namespace std;
 
 //Function to return precedence of operators
