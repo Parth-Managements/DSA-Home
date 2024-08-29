@@ -35,36 +35,44 @@ node *convertarr2dll(vector<int> arr)
     return head;
 }
 
-node *deleteatbeg(node* head)
+node *deleteatbeg(node *head)
 {
-    if(head == NULL) return NULL;
-    node* temp = head;
+    if (head == NULL)
+        return NULL;
+    node *temp = head;
     head = head->next;
     delete temp;
     return head;
 }
 
-node* deleteatend(node* head)
+node *deleteatend(node *head)
 {
-    if(head == NULL) return NULL;
-    node* i;
-    for(i=head;i!=NULL;i=i->next)
+    if (head == NULL)
+        return NULL;
+    node *i;
+    for (i = head; i != NULL; i = i->next)
     {
-        if(i->next->next == nullptr)
+        if (i->next == nullptr)
         {
             break;
-        }        
+        }
     }
-    node* temp = i->next;
-    temp->back = nullptr;
-    i->next = nullptr;
-    delete temp;
-    return head;
+    if (i->back == nullptr)
+    {
+        delete i;
+        return NULL;
+    }
+    else
+    {
+        i->back->next = nullptr;
+        delete i;
+        return head;
+    }
 }
 
 node *deleteany(int data1, node *head)
 {
-    if(data1 == head->data)
+    if (data1 == head->data)
     {
         head = deleteatbeg(head);
         return head;
@@ -80,7 +88,7 @@ node *deleteany(int data1, node *head)
     node *temp = i->next;
     node *front = i->next->next;
     node *prev = i;
-    if(front == nullptr)
+    if (front == nullptr)
     {
         head = deleteatend(head);
         return head;
@@ -91,46 +99,92 @@ node *deleteany(int data1, node *head)
     return head;
 }
 
-node* insertatbeg(int data , node* head)
+node *insertatbeg(int data, node *head)
 {
-    node* temp = new node(data,head,nullptr);
+    node *temp = new node(data, head, nullptr);
     head->back = temp;
     head = temp;
     return head;
 }
-node* insertatend(int data , node* head)
+node *insertbeforeend(int data, node *head)
 {
-    node* i;
-    for(i = head;i!=NULL;i=i->next)
+    node *i;
+    for (i = head; i != NULL; i = i->next)
     {
-        if(i->next->next == nullptr)
+        if (i->next->next == nullptr)
         {
             break;
         }
     }
-    node* temp = new node(data,nullptr,i->next);
-    i->next->next = temp;
-    return head;
-}
-node* insertany(int data,int src,node* head)
-{
-    node* i;
-    for(i = head;i!=NULL;i=i->next)
-    {
-        if(i->data == src)
-        {
-            break;
-        }
-    }
-    node* temp = new node(data,i->next,i);
+    node *temp = new node(data, i->next, i);
     i->next->back = temp;
     i->next = temp;
     return head;
 }
-void printdl(node* head)
+node *insertatend(int data, node *head)
 {
-    node* i;
-    for(i = head;i!=NULL;i=i->next)
+    node *i;
+    for (i = head; i != NULL; i = i->next)
+    {
+        if (i->next->next == nullptr)
+        {
+            break;
+        }
+    }
+    node *temp = new node(data, nullptr, i->next);
+    i->next->next = temp;
+    return head;
+}
+node *insertany(int data, int src, node *head)
+{
+    node *i;
+    for (i = head; i != NULL; i = i->next)
+    {
+        if (i->data == src)
+        {
+            break;
+        }
+    }
+    if (i->next == nullptr)
+    {
+        node *temp = new node(data, i->next, i);
+        i->next = temp;
+        return head;
+    }
+    else
+    {
+        node *temp = new node(data, i->next, i);
+        i->next->back = temp;
+        i->next = temp;
+        return head;
+    }
+}
+node *reversedll(node *head)
+{
+    if (head == NULL)
+    {
+        return head;
+    }
+
+    if (head->next == nullptr)
+    {
+        return head;
+    }
+    node *last = NULL;
+    node *current = head;
+    while (current != NULL)
+    {
+        last = current->back;
+        current->back = current->next;
+        current->next = last;
+        current = current->back;
+    }
+    return last->back;
+}
+void printdl(node *head)
+{
+    node *i;
+    for (i = head; i != NULL; i = i->next)
     {
         cout << i->data << " ";
     }
@@ -152,14 +206,12 @@ void printreversedl(node *head)
         temp = temp->back;
     }
     cout << temp->data;
-
-    
 }
 
 int main()
 {
     vector<int> arr = {1, 2, 3, 4, 5};
     node *head = convertarr2dll(arr);
-    head = deleteany(5,head);
-    printreversedl(head);
+    head = reversedll(head);
+    printdl(head);
 }
