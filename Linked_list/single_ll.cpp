@@ -52,10 +52,28 @@ node *reversell(node *head)
     return prev;
 }
 
+node* pracreversell(node* head)
+{
+    node* front;
+    node* prev;
+    node* temp = head;
+
+    while(temp != NULL)
+    {
+        front = temp->next;
+        temp->next = prev;
+        prev = temp;
+        temp = front;
+    }
+
+    return prev;
+
+}
+
 void printll(node *head)
 {
     node *i;
-    for (i = head; i != nullptr; i = i->next)
+    for (i = head; i != NULL; i = i->next)
     {
         cout << i->data;
     }
@@ -92,5 +110,6 @@ int main()
 {
     vector<int> arr = {1, 2, 1,2,1};
     node *head = convertarr2ll(arr);
-    chkpaindrome(head);
+    head = pracreversell(head);
+    printll(head);
 }

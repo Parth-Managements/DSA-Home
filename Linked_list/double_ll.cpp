@@ -181,6 +181,20 @@ node *reversedll(node *head)
     }
     return last->back;
 }
+
+node* pracreversedll(node* head)
+{
+    node* last = NULL;
+    node* current = head;
+    while(current != NULL)
+    {
+        last = current->back;
+        current->back = current->next;
+        current->next = last;
+        current = current->back;
+    }
+    return last->back;
+}
 void printdl(node *head)
 {
     node *i;
@@ -212,6 +226,6 @@ int main()
 {
     vector<int> arr = {1, 2, 3, 4, 5};
     node *head = convertarr2dll(arr);
-    head = reversedll(head);
+    head = pracreversedll(head);
     printdl(head);
 }

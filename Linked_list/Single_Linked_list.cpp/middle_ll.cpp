@@ -49,9 +49,51 @@ void printll(node *head)
     }
 }
 
+node *removeany(node *head, int pos)
+{
+    if (head == NULL || head->next == nullptr)
+        return head;
+
+    if(pos == 1)
+    {
+        node* temp = head;
+        head = head->next;
+        free(temp);
+        return head;
+    }
+    node *i;
+    node *prev = NULL;
+    int cnt = 0;
+    for (i = head; i != NULL; i = i->next)
+    {
+        cnt++;
+        if (cnt == pos)
+        {
+            prev->next = prev->next->next;
+        }
+        prev = i;
+    }
+
+    return head;
+}
+
+node *removeNthFromEnd(node *head, int k)
+{
+    int cnt = 0;
+    node *i;
+    for (i = head; i != NULL; i = i->next)
+    {
+        cnt++;
+    }
+    head = removeany(head, (cnt - k) + 1);
+    return head;
+}
+
 int main()
 {
-    vector<int> arr = {1, 2, 3, 4, 5,7};
+    vector<int> arr = {1, 2};
     node *head = convertarr2ll(arr);
-    middle(head);
+    // middle(head);
+    head = removeNthFromEnd(head, 1);
+    printll(head);
 }
