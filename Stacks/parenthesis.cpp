@@ -11,11 +11,11 @@ int main()
     {
         char c = s[i];
 
-        if (c == '(' || c == '[' || c == '{') //(
+        if (c == '(' || c == '[' || c == '{') //([{
         {
             ans.push(c);
         }
-        else if (c == ')')
+        else if (c == ')')//)
         {
             if (ans.empty() || ans.top() != '(')
             {
@@ -27,7 +27,7 @@ int main()
                 ans.pop();
             }
         }
-        else if (c == ']')
+        else if (c == ']')//]
         {
             if (ans.empty() || ans.top() != '[')
             {
@@ -39,7 +39,7 @@ int main()
                 ans.pop();
             }
         }
-        else if (c == '}')
+        else if (c == '}') //}
         {
             if (ans.empty() || ans.top() != '{')
             {
@@ -52,5 +52,12 @@ int main()
         }
     }
 
-    return ans.empty();
+    if(ans.empty())
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }

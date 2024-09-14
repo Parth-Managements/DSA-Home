@@ -54,8 +54,8 @@ node *reversell(node *head)
 
 node* pracreversell(node* head)
 {
-    node* front;
-    node* prev;
+    node* front = NULL;
+    node* prev = NULL;
     node* temp = head;
 
     while(temp != NULL)
@@ -108,7 +108,7 @@ void chkpaindrome(node *head)
 
 int main()
 {
-    vector<int> arr = {1, 2, 1,2,1};
+    vector<int> arr = {5,4,3,2,1};
     node *head = convertarr2ll(arr);
     head = pracreversell(head);
     printll(head);
